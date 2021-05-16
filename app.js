@@ -64,6 +64,28 @@ app.get('/adduser2', (request, response) => {
   });
 });
 
+app.get('/getemails', (request, response) => {
+  let sql = 'SELECT * FROM users';
+  db.query(sql, (err, results) => {
+    if(err) {
+      throw err;
+    }
+    console.log(results);
+    response.send('Emails fetched...');
+  });
+});
+
+app.get('/getemailsbyyear/:year', (request, response) => {
+  let sql = `SELECT * FROM users WHERE YEAR(created_at) = ${request.params.year}`;
+  db.query(sql, (err, results) => {
+    if(err) {
+      throw err;
+    }
+    console.log(results);
+    response.send('Emails fetched...');
+  });
+});
+
 app.listen('3000', () => {
   console.log('Server started on port 3000');
 });
