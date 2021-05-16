@@ -40,9 +40,29 @@ app.get('/createuserstable', (request, response) => {
   });
 });
 
-app.get('/insertuser1', (request, response) => {
-  let sql = 'INSERT INTO users (email)'
-})
+app.get('/adduser1', (request, response) => {
+  let sql = 'INSERT INTO users SET ?';
+  let content = { email: 'abc@cde.xyz' };
+  db.query(sql, content, (err, result) => {
+    if(err) {
+      throw err;
+    }
+    console.log(result);
+    response.send('First email added...');
+  });
+});
+
+app.get('/adduser2', (request, response) => {
+  let sql = 'INSERT INTO users SET ?';
+  let content = { email: 'hello@world.com' };
+  db.query(sql, content, (err, result) => {
+    if(err) {
+      throw err;
+    }
+    console.log(result);
+    response.send('Second email added...');
+  });
+});
 
 app.listen('3000', () => {
   console.log('Server started on port 3000');
