@@ -22,15 +22,28 @@ app.get('/createdb', (request, response) => {
   let sql = 'CREATE DATABASE join_us';
   db.query(sql, (err, result) => {
     if(err) {
-      throw err
+      throw err;
     }
     console.log(result);
     response.send('database created...');
-  })
-})
+  });
+});
 
-// app.get('/createtable', (request, response))
+app.get('/createuserstable', (request, response) => {
+  let sql = 'CREATE TABLE users (email VARCHAR(255) PRIMARY KEY, created_at TIMESTAMP DEFAULT NOW())';
+  db.query(sql, (err, result) => {
+    if(err) {
+      throw err;
+    }
+    console.log(result);
+    response.send('Users table created...');
+  });
+});
+
+app.get('/insertuser1', (request, response) => {
+  let sql = 'INSERT INTO users (email)'
+})
 
 app.listen('3000', () => {
   console.log('Server started on port 3000');
-})
+});
